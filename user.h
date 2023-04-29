@@ -1,38 +1,40 @@
-
 #include <string>
 
 using std::string;
 
-#ifndef USER_H
-#define USER_H
+#ifndef ORDER_H
+#define ORDER_H
 
 
-class User
+class Order
 {
-    private:
-        string Password = "", User = "", Name = "";
+private:
+    string OrderID = "", Items = "", Cost = "", Shipping = "", Quantity = "";
 
-    public:
-        User();
-        User(string Password, string User, string Name)
-        {
-            this->Password = Password;
-            this->User = User; 
-            this->Name = Name;
-        };
+public:
+    Order();
+    Order(string OrderID, string Items, string Cost, string Quantity, string Shipping)
+    {
+        this->OrderID = OrderID;
+        this->Items = Items;
+        this->Cost = Cost;
+        this->Quantity = Quantity;
+        this->Shipping = Shipping;
+    };
 
-        // getters
-        
-        string getName();
-        string getUsername();
-        string getPassword();
-        
-        // setters
-        string setName(string name);
-        string setPassword(string password);
-        string setUsername(string name);
-        void logIn(string password ,string user);
-        void logOut(); 
+    // getters
+    string getOrderID();// { return OrderID; };
+    string getItems();// { return Items; };
+    string getCost();// { return Cost; };
+    string getShipping();// { return Shipping; };
+    string getQuantity();// { return Quantity; };
+
+    // setters
+    void setOrderID(string OrderID);// { this->Quantity = OrderID; };
+    void setItems(string Items);// { this->Quantity = Items; };
+    void setCost(string Cost);// { this->Quantity = Cost; };
+    void setShipping(string Shipping);// { this->Quantity = Shipping; };
+    void setQuantity(string Quantity);// { this->Quantity = Quantity; };
 };
 
-#endif // USER_H
+#endif // ORDER_H
