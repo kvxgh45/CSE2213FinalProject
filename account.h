@@ -8,30 +8,28 @@ using std::string;
 
 class Account
 {
-    private:
-        string Shipping = "", Billing = "", OrderInfo = "",Payment = ""; 
-     
-    public:
-        Account();
-        Account(string Shipping, string Billing, string OrderInfo, string Payment)
-        {
-            this->Shipping = Shipping; 
-            this->Billing = Billing; 
-            this->OrderInfo = OrderInfo;
-            this->Payment = Payment; 
-        };
+private:
+    string Shipping = "", Billing = "", OrderInfo = "", Payment = "";
 
-        // getters
-        string getBilling();
-        string getOrderInfo();
-        string getShipping(); 
-        string getPayment(); 
-        string setShipping(string shipping,address1);
-        string setBilling(string billing, address2);
-        string setPayment(string Payment, card);
+public:
+    Account();
+    Account(string Shipping, string Billing, string OrderInfo, string Payment)
+    {
+        this->Shipping = Shipping;
+        this->Billing = Billing;
+        this->OrderInfo = OrderInfo;
+        this->Payment = Payment;
+    };
 
-        // setters
-        void deleteAccount(); 
+    // getters
+    string getBilling();
+    string getOrderInfo();
+    string getShipping();
+    string getPayment();
+    string setShipping(string shipping);
+    string setBilling(string billing);
+    string setPayment(string Payment);
+
 };
 
 #endif // USER_H
