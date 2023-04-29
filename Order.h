@@ -23,18 +23,18 @@ public:
     };
 
     // getters
-    string getOrderID() { return OrderID; };
-    string getItems() { return Items; };
-    string getCost() { return Cost; };
-    string getShipping() { return Shipping; };
-    string getQuantity() { return Quantity; };
+    string getOrderID();// { return OrderID; };
+    string getItems();// { return Items; };
+    string getCost();// { return Cost; };
+    string getShipping();// { return Shipping; };
+    string getQuantity();// { return Quantity; };
 
     // setters
-    void setOrderID(string OrderID) { this->Quantity = OrderID; };
-    void setItems(string Items) { this->Quantity = Items; };
-    void setCost(string Cost) { this->Quantity = Cost; };
-    void setShipping(string Shipping) { this->Quantity = Shipping; };
-    void setQuantity(string Quantity) { this->Quantity = Quantity; };
+    void setOrderID(string OrderID);// { this->Quantity = OrderID; };
+    void setItems(string Items);// { this->Quantity = Items; };
+    void setCost(string Cost);// { this->Quantity = Cost; };
+    void setShipping(string Shipping);// { this->Quantity = Shipping; };
+    void setQuantity(string Quantity);// { this->Quantity = Quantity; };
 };
 
 #endif // ORDER_H

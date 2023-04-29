@@ -24,17 +24,17 @@ public:
         this->Quantity = Quantity;
     };
 
-    // getters
-    string getShirtID() { return ShirtID; };
-    string getBrand() { return Brand; };
-    string getStyle() { return Style; };
-    string getSize() { return Color; };
-    string getColor() { return Size; };
-    string getFabric() { return Fabric; };
-    string getQuantity() { return Quantity; };
+    //getters
+    string getShirtID();// { return ShirtID; };
+    string getBrand();//  { return Brand; };
+    string getStyle();//  { return Style; };
+    string getSize();//  { return Color; };
+    string getColor();//  { return Size; };
+    string getFabric();//  { return Fabric; };
+    string getQuantity();//  { return Quantity; };
 
     // setters
-    void setQuantity(string Quantity) { this->Quantity = Quantity; };
+    void setQuantity(string Quantity);//  { this->Quantity = Quantity; };
 };
 
 #endif // SHIRT_H

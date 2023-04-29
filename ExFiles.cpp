@@ -25,18 +25,8 @@ int main()
     vector<Shirts> shirts;
     vector<Order> orderHis;
 
-    //readShirts(shirts);
-    //displayShirts(shirts);
-    //editShirts(shirts);
-
-    
-    Order tmp("correctversion?", "Ralph T-shirt", "89.99", "5", "Lake Estates");
-    //
-    //
-    readOrder(orderHis);
-    orderHis.push_back(tmp);
-    addOrder(orderHis);
-    displayOrder(orderHis);
+    readShirts(shirts);
+    displayShirts(shirts);
     cout << endl;
 
     return 0;
