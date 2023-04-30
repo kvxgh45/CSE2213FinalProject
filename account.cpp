@@ -14,19 +14,20 @@ string Account::getBilling() {
     return Billing;
 }
 
-string Account::getOrderInfo() {
+/*string Account::getOrderInfo() {
     return Billing;
-}
+}*/
+
 string Account::getPayment() {
     return Payment;
 }
-string Account::setShipping(string address1) {
+void Account::setShipping(string address1) {
     this->Shipping = Shipping;
 }
-string Account::setBilling(string address2) {
+void Account::setBilling(string address2) {
     this->Billing = Billing;
 
 }
-string Account::setPayment(string card) {
+void Account::setPayment(string card) {
     this->Payment = Payment;
 }
