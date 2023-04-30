@@ -8,43 +8,80 @@
 #include "account.h"
 #include "user.h"
 
-
 using namespace std;
 
-struct Account {
-    //string name;
-    string username;
-    string password;
-};
+//void displayShirts(vector<Shirts>& shirts);
+void displayOrder(vector<Order>& order);
+void createUser(vector<User>& user) {
 
-bool createAccount(Account& account) {
-    cout << "Create an Account" << endl;
+    ofstream outfile;
+    outfile.open("User.txt");
 
-    //cout << "Name: ";
-    //getline(cin, account.name);
+    cout << "Creating your Account" << endl << endl;
+    string name, username, password;
+
+    cout << "Name: ";
+    cin >> name;
 
     cout << "Username: ";
-    getline(cin, account.username);
+    cin >> username;
+
 
     cout << "Password: ";
-    getline(cin, account.password);
+    cin >> password;
 
-    cout << "Account created successfully!" << endl << endl;;
-    return true;
+    User tmp(name, username, password);
+    user.push_back(tmp);
+
+    outfile << user[0].getName() << endl;
+    outfile << user[0].getUsername() << endl;
+    outfile << user[0].getPassword() << endl;
+    outfile << endl;
+
+
 }
+void createAccount(vector<Account>& account) {
 
-bool login(Account& account) {
+    ofstream outfile;
+    outfile.open("Account.txt");
+
+    cout << "Creating your Account" << endl << endl;
+    string shipping, billing, card;
+
+    cout << "Please enter your shipping address: ";
+    cin >> shipping;
+    cout << endl;
+
+    cout << "Please enter your billing address: ";
+    cin >> billing;
+    cout << endl;
+
+    cout << "Please enter your credit card information: ";
+    cin >> card;
+    cout << endl;
+
+    Account tmp(shipping, billing, card);
+    account.push_back(tmp);
+
+    outfile << account[0].getShipping() << endl;
+    outfile << account[0].getBilling() << endl;
+    outfile << account[0].getPayment() << endl;
+    outfile << endl;
+}
+bool login(vector<User>& user) {
+
     string name, username, password;
 
     cout << "Login" << endl;
     cout << "Username: ";
-    getline(cin, username);
+    cin >> username;
+    cout << endl;
 
     cout << "Password: ";
-    getline(cin, password);
+    cin >> password;
 
-    if (username == account.username && password == account.password) {
-        cout << "Login successful! Welcome, " << name << "!" << endl;
+    if (username == user[0].getUsername() && password == user[0].getPassword()) {
+        cout << "Login successful! Welcome, " << user[0].getName() << "!" << endl << endl;
         return true;
     }
     else {
@@ -52,64 +89,256 @@ bool login(Account& account) {
         return false;
     }
 }
+void displayMenu();
+void displayCartMunu();
+void viewCart(vector<ShoppingCart>& cart) {
+
+    cout << "Here is your current shopping cart: " << endl << endl;
+
+    for (int i = 0; i < cart.size(); i++) {
+
+        cout << i + 1 << ") ----------" << endl;
+        cout << "Shirt Name: " << cart[i].getItemName() << " - Quantity: " << cart[i].getQuantity() << endl;
+        cout << "Price: $" << stoi(cart[i].getPrice()) * stoi(cart[i].getQuantity()) << endl << endl;
+    }
+
+    cout << "Shipping address: " << cart[0].getShipping() << endl;
+    cout << "Billing address: " << cart[0].getBilling() << endl;
+    cout << "Credit card information: " << cart[0].getPayment() << endl;
+
+
+
+}
+void viewAccount();
+void viewItems(vector<Shirts>& shirts);
+
+void editShirts(vector<Shirts>& shirts);
+void editUsers(vector<User>& user);
+void editAccount(vector<Account>& account);
+
+void addOrder(vector<Order>& order);
+void addShirt(vector<Shirts>& shirts, vector<ShoppingCart>& cart, vector<Account>& account) {
+
+    int shirtNum;
+    int shirtQuantity=1;
+    bool selection = false;
+    bool selection2 = false;
+
+    while (selection == false) {
+
+        cout << "Enter the number of the shirt you wish to buy (1-10): ";
+        cin >> shirtNum;
+
+        if (shirtNum > 0 && shirtNum < 11) {
+            selection = true;
+        }
+
+        else {
+
+            cout << "Invalid selction." << endl;
+        }
+
+    }
+
+    while (selection == false) {
+
+        cout << "How many of this item do you wish to buy?: ";
+        cin >> shirtQuantity;
+
+        if (shirtQuantity > 0) {
+
+            selection2 = true;
+        }
+
+        else {
+            cout << "Invalid number." << endl;
+        }
+
+    }
+
+    int i = shirtNum - 1;
+    string itemName = shirts[i].getBrand() + " " + shirts[i].getStyle();
+    string Quantity = to_string(shirtQuantity);
+    string price = shirts[i].getPrice();
+    string shipping = account[0].getShipping();
+    string billing = account[0].getBilling();
+    string payment = account[0].getPayment();
+
+    ShoppingCart tmp(itemName, Quantity, price, shipping, billing, payment);
+    cart.push_back(tmp);
+
+
+
+
+
+
+}
+
+void readShirts(vector<Shirts>& shirts);
+void readUsers(vector<User>& user);
+void readAccount(vector<Account>& account);
+void readOrder(vector<Order>& order);
+
+int main() {
+
+    vector<User> user;
+    vector<Account> account;
+    vector<Order> order;
+    vector<Shirts> shirts;
+    vector<ShoppingCart> cart;
+
+    readShirts(shirts);
+
+    bool loggedIn = false;
+
+    while (true) {
+        cout << "Menu:" << endl;
+        cout << "1. Create an account" << endl;
+        cout << "2. Login" << endl;
+        cout << "3. Exit" << endl;
+        cout << "Enter your choice: ";
+
+        int choice;
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            createUser(user);
+            createAccount(account);
+            break;
+        case 2:
+            loggedIn = login(user);
+            break;
+        case 3:
+            cout << "Exiting..." << endl;
+            return 0;
+        default:
+            cout << "Invalid choice. Please try again." << endl;
+        }
+
+        if (loggedIn) {
+            break;
+        }
+    }
+
+    // Main program loop
+
+    while (true) {
+        displayMenu();
+        cout << "Enter your choice: ";
+
+        int choice;
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            viewItems(shirts);
+            break;
+        case 2:
+            viewCart(cart);
+            break;
+        case 3:
+            //viewAccount(account);
+            break;
+        case 4:
+            cout << "Logging out..." << endl;
+            return 0;
+        default:
+            cout << "Invalid choice. Please try again." << endl;
+        }
+    }
+
+
+    return 0;
+}
 
 void displayMenu() {
     cout << "Menu:" << endl;
     cout << "1. View items" << endl;
-    cout << "2. View Cart" << endl;
+    cout << "2. Purchase Shirts" << endl;
     cout << "3. View Account" << endl;
     cout << "4. Logout" << endl;
 }
 
-void viewItems(vector<Shirts>& shirts) {
-    cout << "Viewing items..." << endl << "-------------------" << endl;
+void displayCartMenu() {
+
+    cout << "Shopping Cart:" << endl;
+    cout << "1. View items" << endl;
+    cout << "2. View cart" << endl;
+    cout << "3. Add shirt" << endl;
+    cout << "4. Remove shirt" << endl;
+    cout << "5. Enter temporary shipping/billing address" << endl;
+    cout << "6. Enter temporary payment information" << endl;
+    cout << "7. Purchase shirts" << endl;
+    cout << "8. Logout" << endl;
+}
+
+void editShirts(vector<Shirts>& shirts) {
+
+    ofstream outfile;
+    outfile.open("ShirtsInventory.txt");
+
     for (int i = 0; i < shirts.size(); i++)
     {
-        cout << i + 1 << ") " << shirts[i].getBrand() << " " << shirts[i].getStyle() << " | Size: " <<
-            shirts[i].getSize() << " Color: " << shirts[i].getColor() << " Fabric: " << shirts[i].getFabric() <<
-            endl << "Price: " << shirts[i].getPrice() << "# in Stock: " << shirts[i].getQuantity() << endl;
-        cout << endl;
-
-        /*cout << "ShirtID: " << shirts[i].getShirtID() << endl;
-        cout << "Brand: " << shirts[i].getBrand() << endl;
-        cout << "Style: " << shirts[i].getStyle() << endl;
-        cout << "Size: " << shirts[i].getSize() << endl;
-        cout << "Color: " << shirts[i].getColor() << endl;
-        cout << "Fabric: " << shirts[i].getFabric() << endl;
-        cout << "Quanity: " << shirts[i].getQuantity() << endl;
-        cout << "Price: " << shirts[i].getPrice() << endl;*/
-        cout << endl;
+        outfile << shirts[i].getShirtID() << endl;
+        outfile << shirts[i].getBrand() << endl;
+        outfile << shirts[i].getStyle() << endl;
+        outfile << shirts[i].getSize() << endl;
+        outfile << shirts[i].getColor() << endl;
+        outfile << shirts[i].getFabric() << endl;
+        outfile << shirts[i].getQuantity() << endl;
+        outfile << shirts[i].getPrice() << endl;
+        outfile << endl;
     }
+
+    outfile.close();
+
 }
 
-void viewCart() {
-    cout << "Viewing cart..." << endl;
-}
-
-void viewAccount() {
-    cout << "Viewing account..." << endl;
-}
-
-void displayOrder(vector<Order>& order) {
-    cout << "Viewing order history..." << endl << "-------------------" << endl;
-    for (int i = 0; i < order.size(); i++) {
-
-        cout << "OrderID: " << order[i].getOrderID() << endl;
-        cout << "Items: " << order[i].getItems() << endl;
-        cout << "Cost: " << order[i].getCost() << endl;
-        cout << "Quantity: " << order[i].getQuantity() << endl;
-        cout << "Shipping: " << order[i].getShipping() << endl;
-        cout << endl;
+void editUsers(vector<User>& user) {
+    ofstream outfile;
+    outfile.open("User.txt");
+    for (int i = 0; i < user.size(); i++)
+    {
+        outfile << user[i].getName() << endl;
+        outfile << user[i].getUsername() << endl;
+        outfile << user[i].getPassword() << endl;
+        outfile << endl;
     }
+    outfile.close();
 }
 
-void editShirts(vector<Shirts>& shirts);
-//void editUsers(vector<Users>& user);
-//void editAccount(vector<Account>& account);
+void editAccount(vector<Account>& account) {
+    ofstream outfile;
+    outfile.open("Account.txt");
+    for (int i = 0; i < account.size(); i++)
+    {
+        outfile << account[i].getShipping() << endl;
+        outfile << account[i].getBilling() << endl;
+        outfile << account[i].getPayment() << endl;
+        outfile << endl;
+    }
+    outfile.close();
+}
 
-void addOrder(vector<Order>& order);
+void addOrder(vector<Order>& order) {
 
-void readShirts(vector<Shirts>& shirts) {
+    ofstream outfile;
+    outfile.open("Order.txt", ios::app);
+
+    outfile << order[0].getOrderID() << endl;
+    outfile << order[0].getItems() << endl;
+    outfile << order[0].getCost() << endl;
+    outfile << order[0].getQuantity() << endl;
+    outfile << order[0].getShipping() << endl;
+    outfile << endl;
+
+    outfile.close();
+
+}
+
+void readShirts(vector<Shirts>& shirts)
+{
     ifstream infile;
     infile.open("ShirtsInventory.txt");
 
@@ -151,71 +380,98 @@ void readShirts(vector<Shirts>& shirts) {
 
     infile.close();
 }
-//void readUsers(vector<Users>& user);
-//void readAccount(vector<Account>& account);
-void readOrder(vector<Order>& order);
 
-int main() {
-    Account userAccount;
-    bool loggedIn = false;
+void readUsers(vector<User>& user)
+{
+    ifstream infile;
+    infile.open("User.txt");
+    string line;
+    while (getline(infile, line))
+    {
+        string uName, name, password;
+        name = line;
 
-    while (true) {
-        cout << "Menu:" << endl;
-        cout << "1. Create an account" << endl;
-        cout << "2. Login" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Enter your choice: ";
+        getline(infile, line);
+        uName = line;
 
-        int choice;
-        cin >> choice;
+        getline(infile, line);
+        password = line;
 
-        switch (choice) {
-        case 1:
-            createAccount(userAccount);
-            break;
-        case 2:
-            loggedIn = login(userAccount);
-            break;
-        case 3:
-            cout << "Exiting..." << endl;
-            return 0;
-        default:
-            cout << "Invalid choice. Please try again." << endl;
-        }
+        getline(infile, line);
 
-        if (loggedIn) {
-            break;
-        }
+        User temp(name, uName, password);
+        user.push_back(temp);
+    }
+    infile.close();
+}
+
+void readAccount(vector<Account>& account) {
+    ifstream infile;
+    infile.open("Account.txt");
+    string line;
+    while (getline(infile, line))
+    {
+        string shipping, billing, payment;
+        payment = line;
+
+        getline(infile, line);
+        shipping = line;
+
+        getline(infile, line);
+        billing = line;
+
+        getline(infile, line);
+
+        Account temp(shipping, billing, payment);
+        account.push_back(temp);
+    }
+    infile.close();
+}
+
+void readOrder(vector<Order>& order) {
+
+    ifstream infile;
+    infile.open("Order.txt");
+
+    string line;
+
+    while (getline(infile, line))
+    {
+        string items, cost, quantity, orderID, shipping;
+
+        orderID = line;
+
+        getline(infile, line);
+        items = line;
+
+        getline(infile, line);
+        cost = line;
+
+        getline(infile, line);
+        quantity = line;
+
+        getline(infile, line);
+        shipping = line;
+
+        getline(infile, line);
+
+        Order temp(orderID, items, cost, quantity, shipping);
+
+        order.push_back(temp);
     }
 
-    // Main program loop
-    vector<Shirts> shirts;
-    //readShirts(shirts);
+    infile.close();
+}
 
-    while (true) {
-        displayMenu();
-        cout << "Enter your choice: ";
+void viewItems(vector<Shirts>& shirts) {
+    cout << "Viewing items..." << endl << "-------------------" << endl;
+    for (int i = 0; i < shirts.size(); i++)
+    {
+        cout << i + 1 << ") " << shirts[i].getBrand() << " " << shirts[i].getStyle() << " | Size: " <<
+            shirts[i].getSize() << " Color: " << shirts[i].getColor() << " Fabric: " << shirts[i].getFabric() <<
+            endl << "Price: " << shirts[i].getPrice() << "# in Stock: " << shirts[i].getQuantity() << endl;
+        cout << endl;
 
-        int choice;
-        cin >> choice;
-
-        switch (choice) {
-        case 1:
-            viewItems(shirts);
-            break;
-        case 2:
-            viewCart();
-            break;
-        case 3:
-            viewAccount();
-            break;
-        case 4:
-            cout << "Logging out..." << endl;
-            return 0;
-        default:
-            cout << "Invalid choice. Please try again." << endl;
-        }
+        cout << endl;
     }
-
-    return 0;
 }
