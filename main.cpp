@@ -20,6 +20,8 @@ struct Account {
 bool createAccount(Account& account) {
     cout << "Create an Account" << endl;
 
+     cin.ignore(); 
+    
     //cout << "Name: ";
     //getline(cin, account.name);
 
@@ -29,7 +31,7 @@ bool createAccount(Account& account) {
     cout << "Password: ";
     getline(cin, account.password);
 
-    cout << "Account created successfully!" << endl << endl;;
+    cout << "Account created successfully!" << endl << endl;
     return true;
 }
 
@@ -79,7 +81,25 @@ void viewItems(vector<Shirts>& shirts) {
         cout << "Quanity: " << shirts[i].getQuantity() << endl;
         cout << "Price: " << shirts[i].getPrice() << endl;*/
         cout << endl;
-    }
+
+         }
+         
+    while (true) {
+        cout << "Enter the item number to add to cart (or 0 to go back to the main menu): ";
+        int choice;
+        cin >> choice;
+
+        if (choice >= 1 && choice <= shirts.size()) {
+            cart.addItem(shirts[choice - 1]);
+            cout << "Item added to cart." << endl;
+            break; // Exit the loop and return to the main menu
+        }
+        else if (choice == 0) {
+            // Go back to the main menu
+            return;
+        }
+        else {
+            cout << "Invalid choice. Please try again." << endl;
 }
 
 void viewCart() {
@@ -188,6 +208,9 @@ int main() {
         }
     }
 
+    // Create an instance of ShoppingCart
+    ShoppingCart cart;
+
     // Main program loop
     vector<Shirts> shirts;
     //readShirts(shirts);
@@ -204,7 +227,7 @@ int main() {
             viewItems(shirts);
             break;
         case 2:
-            viewCart();
+             cart.displayCart();
             break;
         case 3:
             viewAccount();

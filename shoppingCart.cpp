@@ -1,5 +1,7 @@
 #include "ShoppingCart.h"
 #include <iostream>
+#include <vector>
+#include "Shirts.h"
 
 ShoppingCart::ShoppingCart() {
     item = "";
@@ -23,21 +25,22 @@ double ShoppingCart::getPrice() {
 }
 
 void ShoppingCart::addItem(std::string name) {
-    item = name;
-    // Add implementation to update quantity and price accordingly
-    quantity++;
-    // Update the price based on the added item (e.g., retrieve price from a database or calculation)
-    price += 10.0;
-}
-
-void ShoppingCart::removeItem(std::string name) {
-    // Add implementation to remove the specified item from the cart
-    if (item == name && quantity > 0) {
-        quantity--;
-        // Update the price based on the removed item (e.g., retrieve price from a database or calculation)
-        price -= 10.0;
+    void addItem(const Shirts& shirt) {
+        cartItems.push_back(shirt);
     }
 }
+
+    void removeItem(int index) {
+        if (index >= 0 && index < cartItems.size()) {
+            cartItems.erase(cartItems.begin() + index);
+            std::cout << "Item removed from the cart." << std::endl;
+        } else {
+            std::cout << "Invalid item index. Unable to remove item." << std::endl;
+        }
+    }
+};
+
+
 
 void ShoppingCart::setQuantity(int quantity) {
     this->quantity = quantity;
