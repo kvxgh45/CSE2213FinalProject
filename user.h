@@ -1,40 +1,36 @@
+
 #include <string>
 
 using std::string;
 
-#ifndef ORDER_H
-#define ORDER_H
+#ifndef USER_H
+#define USER_H
 
 
-class Order
+class User
 {
 private:
-    string OrderID = "", Items = "", Cost = "", Shipping = "", Quantity = "";
+    string Name = "", user = "", Password = "";
 
 public:
-    Order();
-    Order(string OrderID, string Items, string Cost, string Quantity, string Shipping)
+    User();
+    User(string Name, string user, string Password)
     {
-        this->OrderID = OrderID;
-        this->Items = Items;
-        this->Cost = Cost;
-        this->Quantity = Quantity;
-        this->Shipping = Shipping;
+        this->Password = Password;
+        this->user = user;
+        this->Name = Name;
     };
 
     // getters
-    string getOrderID();// { return OrderID; };
-    string getItems();// { return Items; };
-    string getCost();// { return Cost; };
-    string getShipping();// { return Shipping; };
-    string getQuantity();// { return Quantity; };
+
+    string getName();
+    string getUsername();
+    string getPassword();
 
     // setters
-    void setOrderID(string OrderID);// { this->Quantity = OrderID; };
-    void setItems(string Items);// { this->Quantity = Items; };
-    void setCost(string Cost);// { this->Quantity = Cost; };
-    void setShipping(string Shipping);// { this->Quantity = Shipping; };
-    void setQuantity(string Quantity);// { this->Quantity = Quantity; };
+    void setName(string name);
+    void setPassword(string password);
+    void setUsername(string user);
 };
 
-#endif // ORDER_H
+#endif // USER_H
