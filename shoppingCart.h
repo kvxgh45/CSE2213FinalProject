@@ -1,33 +1,43 @@
+#include <string>
+
+using std::string;
+
 #ifndef SHOPPINGCART_H
 #define SHOPPINGCART_H
 
-#include <string>
 
-class ShoppingCart {
+class ShoppingCart
+{
 private:
-    std::string item;
-    int quantity;
-    double price;
-    std::string shipping;
-    std::string billing;
-    int payment;
+    string ItemName = "", Quantity = "", Price = "", Shipping = "", Billing = "", Payment="";
 
 public:
     ShoppingCart();
-    std::string getItemName();
-    int getQuantity();
-    double getPrice();
-    void addItem(std::string name);
-    void removeItem(std::string name);
-    void setQuantity(int quantity);
-    void displayCart();
-    std::string getShipping();
-    void setTmpShipping(std::string address);
-    std::string getBilling();
-    void setTmpBilling(std::string address);
-    int getPayment();
-    void setTmpPayment(int card);
-    void purchase();
+    ShoppingCart(string ItemName, string Quantity, string Price, string Shipping, string Billing, string Payment)
+    {
+        this->ItemName = ItemName;
+        this->Quantity = Quantity;
+        this->Price = Price;
+        this->Shipping = Shipping;
+        this->Billing = Billing;
+        this->Payment = Payment;
+    };
+
+    // getters
+    string getItemName();
+    string getQuantity();
+    string getPrice();
+    string getShipping();
+    string getBilling();
+    string getPayment();
+
+    // setters
+    void setItemName(string ItemName);
+    void setQuantity(string Quantity);
+    void setPrice(string Price);
+    void setShipping(string Shipping);
+    void setBilling(string Billing);
+    void setPayment(string Payment);
 };
 
 #endif // SHOPPINGCART_H
