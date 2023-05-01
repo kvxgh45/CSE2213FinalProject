@@ -235,10 +235,79 @@ int main() {
             viewItems(shirts);
             break;
         case 2:
-            viewCart(cart);
+            displayCartMenu(cart);
+            bool exitCartMenu = false;
+            while (!exitCartMenu) {
+                displayCartMenu();
+                cout << "Enter your choice: ";
+                int cartChoice;
+                cin >> cartChoice;
+                switch (cartChoice) {
+                case 1:
+                    // View items in the cart
+                    break;
+                case 2:
+                    // View the entire cart
+                    break;
+                case 3:
+                    // Add a shirt to the cart
+                    break;
+                case 4:
+                    // Remove a shirt from the cart
+                    break;
+                case 5:
+                    // Enter temporary shipping/billing address
+                    break;
+                case 6:
+                    // Enter temporary payment information
+                    break;
+                case 7:
+                    // Purchase shirts
+                    break;
+                case 8:
+                    cout << "Logging out..." << endl;
+                    return 0;
+                default:
+                    cout << "Invalid choice. Please try again." << endl;
+                    break;
+                }
+            }
+            break;
+        }
             break;
         case 3:
             //viewAccount(account);
+            displayAccountMenu(account);
+            bool exitAccountMenu = false;
+            while (!exitAccountMenu) {
+                displayAccountMenu();
+                cout << "Enter your choice: ";
+                int accountChoice;
+                cin >> accountChoice;
+                switch (accountChoice) {
+                case 1:
+                    // Edit shipping info
+                    break;
+                case 2:
+                    //  Edit Billing info
+                    break;
+                case 3:
+                    // Edit credit card info
+                    break;
+                case 4:
+                    // view order history
+                    break;
+                case 5:
+                    // delete account
+                    break;
+                case 6:
+                    cout << "Logging out..." << endl;
+                    return 0;
+                default:
+                    cout << "Invalid choice. Please try again." << endl;
+                    break;
+                }
+            }
             break;
         case 4:
             cout << "Logging out..." << endl;
@@ -271,6 +340,17 @@ void displayCartMenu() {
     cout << "6. Enter temporary payment information" << endl;
     cout << "7. Purchase shirts" << endl;
     cout << "8. Logout" << endl;
+}
+
+void displayAccountMenu() {
+
+    cout << "Account Information:" << endl;
+    cout << "1. Edit Shipping" << endl;
+    cout << "2. Edit Billing" << endl;
+    cout << "3. Edit Credit Card Info" << endl;
+    cout << "4. View Order History" << endl;
+    cout << "5. Delete Account" << endl;
+    cout << "6. Logout" << endl;
 }
 
 void editShirts(vector<Shirts>& shirts) {
@@ -475,3 +555,5 @@ void viewItems(vector<Shirts>& shirts) {
         cout << endl;
     }
 }
+
+
