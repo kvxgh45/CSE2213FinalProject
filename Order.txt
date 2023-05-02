@@ -1,0 +1,18 @@
+ORD-0613856395
+Levi's Hoodie, Adidas Graphic Tee, Adidas Jersey, 
+198.000000
+3, 5, 1, 
+KentuckyCove
+
+ORD-2868842428
+Adidas Graphic Tee, Nike Long Sleeve Tee, 
+121.000000
+2, 5, 
+OhioAvenue
+
+ORD-0477226516
+Levi's Hoodie, 
+50.000000
+2, 
+OhioAvenue
+

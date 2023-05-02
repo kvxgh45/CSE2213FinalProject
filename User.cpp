@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "user.h";
+#include "User.h"
 using namespace std;
 
 User::User() {
@@ -19,12 +19,12 @@ string User::getPassword() {
 }
 
 // Setters
-string User::setName(string name) {
+void User::setName(string name) {
     this->Name = Name;
 }
-string User::setPassword(string password) {
+void User::setPassword(string password) {
     this->Password = Password;
 }
-string User::setUsername(string name) {
+void User::setUsername(string user) {
     this->user = user;
 }

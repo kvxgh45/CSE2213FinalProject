@@ -4,7 +4,7 @@ Graphic Tee
 M
 Grey
 Cotton
-83
+87
 15.99
 
 525-h8r6fpcoeh
@@ -13,7 +13,7 @@ Hoodie
 XL
 White
 Cotton
-18
+21
 24.99
 
 525-zrplxvbq7b
@@ -87,4 +87,3 @@ Blue
 Cotton
 93
 10.99
-
